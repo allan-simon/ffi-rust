@@ -1,13 +1,30 @@
 // use to create a .so/.dll
 #![crate_type = "dylib"]
 
-// TODO: we use crate collections
-// so that without the println we may remove the automatic
-// injection of  std crate
-// TODO: we could use writeln and/or puts from libc crate
+// we use crate collections which contains only
+// collections that does not need the runtime to run by default
 extern crate collections;
 extern crate native;
 extern crate libc;
+
+// NOTE: at first I wanted to push the example further and not to
+// include the std crate, which is basically what you would want to
+// do for system programming
+//
+// but too much features will not be available without implemenenting
+// your own memory allocator
+// i.e  "".to_string  or insertion in collection etc.
+//
+// waiting to write a dedicated example about building without std
+// here is basically what you need to append at top of your file
+//
+//#![no_std]
+//#![crate_type = "dylib"]
+//#![feature(phase)]
+//
+//#[phase(plugin,link)]
+//extern crate core;
+
 
 use libc::types::common::c95::c_void;
 use std::mem::transmute;
