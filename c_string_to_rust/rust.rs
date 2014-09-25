@@ -4,11 +4,16 @@
 extern crate libc;
 use std::string::raw::from_buf;
 
-// used to have this use function callable from C
+// used to have this function callable from C
 // 1. no_mangle garanty the name will stay rust_print
 // 2. pub extern garanty the name is exported
+
 #[no_mangle]
-pub extern fn rust_print(value: *const libc::c_char) {
+pub extern fn rust_print(
+    // note that we use "* const libc::c_char" to
+    // represent a string coming from C code
+    value: *const libc::c_char
+) {
 
     // unsafe block because we're not sure if the pointer
     // given by this library is legit (we could receive a null
