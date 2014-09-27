@@ -34,7 +34,7 @@ pub extern fn vector_get(
 
     // (*vector) should not be necessary, there's a bug in current
     // rust (as of end of september 2014) which force us to do that
-    vector[index as uint].to_c_str().as_ptr()
+    unsafe { (*vector)[index as uint].to_c_str().unwrap() }
 
 }
 
