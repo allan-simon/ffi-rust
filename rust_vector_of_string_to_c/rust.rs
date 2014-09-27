@@ -12,9 +12,9 @@ use libc::types::common::c95::c_void;
 #[no_mangle]
 pub extern fn vector_create() -> *mut c_void {
 
-    let vector = box vec![
-        "你好",
-        "好"
+    let vector : Box<Vec<String>> = box vec![
+        "你好".to_string(),
+        "好".to_string()
     ];
 
     unsafe {transmute(vector)}
@@ -44,4 +44,18 @@ pub extern fn vector_get(
     let value = (*vector)[index as uint].to_c_str();
 
     value.as_ptr()
+}
+
+#[no_mangle]
+pub extern fn vector_print(
+    vector_ptr: *mut c_void,
+) {
+
+    let vector : Box<Vec<String>> = unsafe {
+        transmute(vector_ptr)
+    };
+
+    for value in vector.iter() {
+        println!("from rust {}", value);
+    }
 }

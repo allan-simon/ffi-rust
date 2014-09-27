@@ -13,4 +13,8 @@ const char* vector_get(
     uint32_t index
 );
 
+void vector_print(
+    void* vector_ptr
+);
+
 #endif

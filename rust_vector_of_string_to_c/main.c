@@ -2,16 +2,15 @@
 #include "rust.h"
 
 int main () {
-    printf("start\n");
     void* vector = vector_create();
-    printf("get_size\n");
     uint32_t size = vector_size(vector);
-    printf("size %d\n", size);
     for (uint32_t i = 0; i < size; i++) {
         printf(
-            "dedede%s dedede\n",
+            "value %d : %s\n",
+            i,
             vector_get(vector, i)
         );
     }
+    vector_print(vector);
     return 0;
 }
