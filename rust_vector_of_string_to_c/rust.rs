@@ -21,39 +21,27 @@ pub extern fn vector_create() -> *mut c_void {
 }
 
 #[no_mangle]
-pub extern fn vector_size(vector_ptr: *mut c_void) -> u32 {
-    let vector : Box<Vec<String>> = unsafe {
-        transmute(vector_ptr)
-    };
+pub extern fn vector_size(vector: &Vec<String>) -> u32 {
     
     vector.len() as u32
 }
 
 #[no_mangle]
 pub extern fn vector_get(
-    vector_ptr: *mut c_void,
+    vector: &Vec<String> ,
     index: u32
 ) -> *const libc::c_char {
 
-    let vector : Box<Vec<String>> = unsafe {
-        transmute(vector_ptr)
-    };
-
     // (*vector) should not be necessary, there's a bug in current
     // rust (as of end of september 2014) which force us to do that
-    let value = (*vector)[index as uint].to_c_str();
+    vector[index as uint].to_c_str().as_ptr()
 
-    value.as_ptr()
 }
 
 #[no_mangle]
 pub extern fn vector_print(
-    vector_ptr: *mut c_void,
+    vector: &Vec<String>
 ) {
-
-    let vector : Box<Vec<String>> = unsafe {
-        transmute(vector_ptr)
-    };
 
     for value in vector.iter() {
         println!("from rust {}", value);
