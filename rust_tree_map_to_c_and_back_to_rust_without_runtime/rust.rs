@@ -26,8 +26,6 @@ extern crate libc;
 //extern crate core;
 
 
-use libc::types::common::c95::c_void;
-use std::mem::transmute;
 // we need to use TreeMap, and not HashMap
 // because HashMap use a RNG running in a local thread
 // that is init by rust runtime
@@ -36,19 +34,16 @@ use std::mem::transmute;
 use collections::TreeMap;
 
 #[no_mangle]
-pub extern fn create_hash() -> *mut c_void {
+pub extern fn create_hash() -> Box<TreeMap<String,String>> {
     let mut english_to_french =  box TreeMap::new();
     english_to_french.insert("one".to_string(), "un".to_string());
     english_to_french.insert("two".to_string(), "deux".to_string());
 
-    return unsafe {transmute(english_to_french)};
+    english_to_french
 }
 
 #[no_mangle]
-pub extern fn print_hash(english_to_french_ptr: *mut c_void) {
-    let english_to_french : Box<TreeMap<String, String>> = unsafe {
-        transmute(english_to_french_ptr)
-    };
+pub extern fn print_hash(english_to_french: Box<TreeMap<String,String>>) {
     for (english, french) in english_to_french.iter() {
         println!(
             "in french '{}' is '{}'",
