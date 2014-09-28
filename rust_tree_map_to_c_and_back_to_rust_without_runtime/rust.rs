@@ -4,8 +4,6 @@
 // we use crate collections which contains only
 // collections that does not need the runtime to run by default
 extern crate collections;
-extern crate native;
-extern crate libc;
 
 // NOTE: at first I wanted to push the example further and not to
 // include the std crate, which is basically what you would want to
