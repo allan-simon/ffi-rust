@@ -1,18 +1,12 @@
 // use to create a .so/.dll
 #![crate_type = "dylib"]
 
-extern crate native;
 extern crate libc;
 extern crate collections;
 use libc::types::common::c95::c_void;
 use std::mem::transmute;
 use std::collections::HashMap;
 use collections::hash::sip::SipHasher;
-
-#[no_mangle]
-pub extern fn run(argc: int, argv: *const *const u8, kont: extern fn()) {
-    native::start(argc, argv, proc() kont());
-}
 
 #[no_mangle]
 pub extern fn create_hash() -> *mut c_void {
