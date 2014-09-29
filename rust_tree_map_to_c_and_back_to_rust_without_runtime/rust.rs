@@ -32,7 +32,7 @@ extern crate collections;
 use collections::TreeMap;
 
 #[no_mangle]
-pub extern fn create_hash() -> Box<TreeMap<String,String>> {
+pub extern fn create_tree() -> Box<TreeMap<String,String>> {
     let mut english_to_french =  box TreeMap::new();
     english_to_french.insert("one".to_string(), "un".to_string());
     english_to_french.insert("two".to_string(), "deux".to_string());
@@ -41,7 +41,7 @@ pub extern fn create_hash() -> Box<TreeMap<String,String>> {
 }
 
 #[no_mangle]
-pub extern fn print_hash(english_to_french: Box<TreeMap<String,String>>) {
+pub extern fn print_tree(english_to_french: Box<TreeMap<String,String>>) {
     for (english, french) in english_to_french.iter() {
         println!(
             "in french '{}' is '{}'",
