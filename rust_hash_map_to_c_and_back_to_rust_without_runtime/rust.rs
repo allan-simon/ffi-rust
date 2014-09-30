@@ -22,7 +22,7 @@ pub extern fn create_hash() -> Box<HashMap<String, String, SipHasher>> {
 }
 
 #[no_mangle]
-pub extern fn print_hash(english_to_french: Box<HashMap<String, String, SipHasher>>) {
+pub extern fn print_hash(english_to_french: &mut HashMap<String, String, SipHasher>) {
     for (english, french) in english_to_french.iter() {
         println!(
             "in french '{}' is '{}'",
@@ -31,4 +31,9 @@ pub extern fn print_hash(english_to_french: Box<HashMap<String, String, SipHashe
         );
     }
 
+}
+
+#[no_mangle]
+pub extern fn hash_free(english_to_french: Box<HashMap<String, String, SipHasher>>) {
+    let _ = english_to_french;
 }

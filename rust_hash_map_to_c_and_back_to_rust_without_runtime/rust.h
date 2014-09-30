@@ -6,6 +6,9 @@
 void* create_hash();
 
 void print_hash(void* data);
+
+void hash_free(void* data);
+
 int run(int argc, char** argv, void (*kont)(void));
 
 #endif
