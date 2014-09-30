@@ -40,7 +40,7 @@ pub extern fn vector_size(vector: &Vec<String>) -> u32 {
 /// note2: we need to free the pointer returned by this function
 /// ourselves
 #[no_mangle]
-pub extern fn vector_get(
+pub extern fn vector_value_get(
     vector: &Vec<String> ,
     index: u32
 ) -> *const i8 {

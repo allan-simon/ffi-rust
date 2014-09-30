@@ -8,7 +8,7 @@ void* vector_create();
 
 uint32_t vector_size(void* vector_ptr);
 
-const char* vector_get(
+const char* vector_value_get(
     void* vector_ptr,
     uint32_t index
 );
