@@ -10,7 +10,7 @@ use std::c_str::CString;
 /// type, we're garantueed that Box is a single pointer
 ///
 /// note2: after using vector_create from C, we will need to destroy
-/// the value ourselves
+/// the value ourselves using vector_free function
 #[no_mangle]
 pub extern fn vector_create() -> Box<Vec<String>> {
 
@@ -38,7 +38,7 @@ pub extern fn vector_size(vector: &Vec<String>) -> u32 {
 /// crate libc
 ///
 /// note2: we need to free the pointer returned by this function
-/// ourselves
+/// ourselves, using the function vector_value_free
 #[no_mangle]
 pub extern fn vector_value_get(
     vector: &Vec<String> ,
@@ -51,8 +51,8 @@ pub extern fn vector_value_get(
 
 }
 
-///
-///
+/// retake ownership, so that we can let rust automatically
+/// free the variable at the end of this function scope
 ///
 #[no_mangle]
 pub extern fn vector_value_free (buffer: *const i8) {
@@ -74,8 +74,8 @@ pub extern fn vector_print(
 }
 
 
-///
-///
+/// Give back the ownership of the vector to rust
+/// so that rust can free it
 ///
 #[no_mangle]
 pub extern fn vector_free(
