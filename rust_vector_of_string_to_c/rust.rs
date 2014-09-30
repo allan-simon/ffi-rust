@@ -1,6 +1,8 @@
 // use to create a .so/.dll
 #![crate_type = "dylib"]
 
+use std::c_str::CString;
+
 /// create a new vector with some values inside for test
 ///
 /// note: we can return directly a Box<Vec<>> and use it
@@ -49,6 +51,15 @@ pub extern fn vector_get(
 
 }
 
+///
+///
+///
+#[no_mangle]
+pub extern fn vector_value_free (buffer: *const i8) {
+    unsafe { CString::new(buffer, true); }
+}
+
+
 /// simple debug function to print the content of a vector
 ///
 ///
@@ -60,4 +71,15 @@ pub extern fn vector_print(
     for value in vector.iter() {
         println!("from rust {}", value);
     }
+}
+
+
+///
+///
+///
+#[no_mangle]
+pub extern fn vector_free(
+    vector: Box<Vec<String>>
+) {
+    let _ = vector;
 }
