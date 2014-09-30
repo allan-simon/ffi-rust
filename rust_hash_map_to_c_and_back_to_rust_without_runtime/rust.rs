@@ -9,7 +9,7 @@ use std::collections::HashMap;
 use collections::hash::sip::SipHasher;
 
 #[no_mangle]
-pub extern fn create_hash() -> Box<HashMap<String, String, SipHasher>> {
+pub extern fn hash_new() -> Box<HashMap<String, String, SipHasher>> {
     // SipHasher at the opposite of RandomSipHasher does not require
     // rust runtime to work, enabling use to use HashMap without runtime
     // too
@@ -22,7 +22,7 @@ pub extern fn create_hash() -> Box<HashMap<String, String, SipHasher>> {
 }
 
 #[no_mangle]
-pub extern fn print_hash(english_to_french: &mut HashMap<String, String, SipHasher>) {
+pub extern fn hash_print(english_to_french: &mut HashMap<String, String, SipHasher>) {
     for (english, french) in english_to_french.iter() {
         println!(
             "in french '{}' is '{}'",

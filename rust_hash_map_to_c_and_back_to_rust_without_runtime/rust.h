@@ -3,12 +3,10 @@
 
 // we define the rust functions here
 // so our C compiler know this functions exists
-void* create_hash();
+void* hash_new();
 
-void print_hash(void* data);
+void hash_print(void* data);
 
 void hash_free(void* data);
-
-int run(int argc, char** argv, void (*kont)(void));
 
 #endif

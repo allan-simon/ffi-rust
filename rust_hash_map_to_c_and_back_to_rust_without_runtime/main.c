@@ -1,9 +1,9 @@
 #include "rust.h"
 
 int main (int argc, char** argv) {
-    void* data = create_hash();
-    print_hash(data);
-    print_hash(data);
+    void* data = hash_new();
+    hash_print(data);
+    hash_print(data);
     hash_free(data);
 }
 
